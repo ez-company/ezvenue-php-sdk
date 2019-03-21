@@ -1,0 +1,25 @@
+{
+    "name": "ezvenue/ezvenue-php-sdk",
+    "description": "PHP SDK for EZ Venue API v1",
+    "homepage": "https://github.com/ez-company/ezvenue-php-sdk",
+    "license": "MIT",
+    "keywords": [
+        "php", "class", "ezvenue", "ezvenue.app", "address", "venue", "courts"
+    ],
+    "authors": [
+        {
+            "name": "Jovanni Lo",
+            "email": "lodev09@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4",
+        "php-curl-class/php-curl-class": "*",
+        "lodev09/php-util": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "EZVenue\\": "src/"
+        }
+    }
+}
