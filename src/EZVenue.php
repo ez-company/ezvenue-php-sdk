@@ -19,6 +19,29 @@ class EZVenue {
     }
 
     /**
+     * Create a batch
+     *
+     * @param @file source file
+     * @param $mapping field mapping data
+     *
+     * @return Batch
+     *
+     */
+    public function createBatch($file, $mapping = null) {
+        self::$curl->setHeader('Content-Type', 'multipart/form-data');
+        $response = self::$curl->post(self::$api_url.'/lookups/batches', [
+            'file' => new \CURLFile($file),
+            'mapping' => $mapping
+        ]);
+
+        if (self::$curl->error) {
+            throw new ProtocolException($response, self::$curl);
+        } else {
+            return new Batch($response);
+        }
+    }
+
+    /**
      * Creates a lookup
      *
      * @param $data
@@ -60,8 +83,9 @@ class EZVenue {
      * @return array
      *
      */
-    public function getLookups($params = []) {
-        $response = self::$curl->get(self::$api_url.'/lookups', $params);
+    public function getLookups($params = [], $page = 1) {
+        $response = self::$curl->get(self::$api_url.'/lookups?page='.$page, $params);
+        plog($response);
         if (self::$curl->error) {
             throw new ProtocolException($response, self::$curl);
         } else {
@@ -74,8 +98,42 @@ class EZVenue {
         }
     }
 
+    /**
+     * Get batches
+     *
+     * @return array
+     *
+     */
+    public function getBatches($params = [], $page = 1) {
+        $response = self::$curl->get(self::$api_url.'/lookups/batches?page='.$page, $params);
+        if (self::$curl->error) {
+            throw new ProtocolException($response, self::$curl);
+        } else {
+            $batches = [];
+            foreach ($response as $batch_data) {
+                $batches[] = new Batch($batch_data);
+            }
+
+            return $batches;
+        }
+    }
+
+    public function getBatch($id) {
+        $response = self::$curl->get(self::$api_url.'/lookups/batches/'.$id);
+        if (self::$curl->error) {
+            throw new ProtocolException($response, self::$curl);
+        } else {
+            return new Batch($response);
+        }
+    }
+
     public function lookups($id) {
         $lookup = new Lookup(['id' => $id]);
         return $lookup;
+    }
+
+    public function batches($id) {
+        $batch = new Batch(['id' => $id]);
+        return $batch;
     }
 }

@@ -5,8 +5,6 @@ use \Common\Util;
 
 class Lookup {
 
-    private $_entities = [];
-
     public function __construct($data) {
         $this->id = Util::get('id', $data);
         $this->batch_id = Util::get('batch_id', $data);
@@ -20,6 +18,14 @@ class Lookup {
         $this->zip = Util::get('zip', $data);
         $this->lat = Util::get('lat', $data);
         $this->lng = Util::get('lng', $data);
+        $this->formatted_address = Util::get('formatted_address', $data);
         $this->created_at = Util::get('created_at', $data);
+        $this->results = [];
+
+        if ($results = get('results', $data)) {
+            foreach ($results as $lookup_result) {
+                $this->results[] = new LookupResult($lookup_result);
+            }
+        }
     }
 }
