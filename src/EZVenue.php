@@ -85,7 +85,6 @@ class EZVenue {
      */
     public function getLookups($params = [], $page = 1) {
         $response = self::$curl->get(self::$api_url.'/lookups?page='.$page, $params);
-        plog($response);
         if (self::$curl->error) {
             throw new ProtocolException($response, self::$curl);
         } else {
