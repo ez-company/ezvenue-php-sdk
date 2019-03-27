@@ -135,4 +135,11 @@ class EZVenue {
         $batch = new Batch(['id' => $id]);
         return $batch;
     }
+
+    public function getPagination() {
+        return [
+            'next' => self::$curl->responseHeaders['next-page'],
+            'last' => self::$curl->responseHeaders['last-page']
+        ];
+    }
 }
