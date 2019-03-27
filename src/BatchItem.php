@@ -19,4 +19,8 @@ class BatchItem {
             $this->result = new Lookup($result_data);
         }
     }
+
+    public function isCompleted() {
+        return $this->completed_at ? true : false;
+    }
 }
