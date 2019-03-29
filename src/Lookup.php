@@ -10,6 +10,7 @@ class Lookup {
         $this->batch_id = Util::get('batch_id', $data);
         $this->ref = Util::get('ref', $data);
         $this->result = Util::get('result', $data);
+        $this->exception = Util::get('exception', $data);
         $this->amount = Util::get('amount', $data);
         $this->street_1 = Util::get('street_1', $data);
         $this->street_2 = Util::get('street_2', $data);
@@ -19,7 +20,9 @@ class Lookup {
         $this->lat = Util::get('lat', $data);
         $this->lng = Util::get('lng', $data);
         $this->formatted_address = Util::get('formatted_address', $data);
+        $this->failed_at = Util::get('failed_at', $data);
         $this->created_at = Util::get('created_at', $data);
+        $this->notes = Util::get('notes', $data);
         $this->results = [];
 
         if ($results = get('results', $data)) {
