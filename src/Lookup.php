@@ -23,6 +23,7 @@ class Lookup {
         $this->failed_at = Util::get('failed_at', $data);
         $this->created_at = Util::get('created_at', $data);
         $this->notes = Util::get('notes', $data);
+        $this->completed_at = Util::get('completed_at', $data);
         $this->results = [];
 
         if ($results = get('results', $data)) {
@@ -30,5 +31,9 @@ class Lookup {
                 $this->results[] = new LookupResult($lookup_result);
             }
         }
+    }
+
+    public function isCompleted() {
+        return $this->completed_at ? true : false;
     }
 }

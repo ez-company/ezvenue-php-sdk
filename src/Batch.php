@@ -26,7 +26,7 @@ class Batch {
         } else {
             $items = [];
             foreach ($response as $item_data) {
-                $items[] = new BatchItem($item_data);
+                $items[] = new Lookup($item_data);
             }
 
             return $items;
