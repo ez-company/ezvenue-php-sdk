@@ -6,7 +6,7 @@ use \Curl\Curl;
 use \Common\Util;
 
 class EZVenue {
-
+    const VERSION = '0.2.1';
     public static $curl;
     public static $api_url;
 
@@ -16,6 +16,7 @@ class EZVenue {
         self::$curl = new Curl();
         self::$curl->setBasicAuthentication($usernname, $password);
         self::$curl->setHeader('Content-Type', 'application/json');
+        self::$curl->setUserAgent('EZVenue-PHP/'.self::VERSION.' (https://github.com/ez-company/ezvenue-php-sdk) PHP/'.PHP_VERSION.' Curl/'.curl_version()['version']);
     }
 
     /**
