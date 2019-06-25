@@ -13,6 +13,7 @@ class LookupResult {
         $this->venue_precinct = Util::get('venue_precinct', $data);
         $this->venue_name = Util::get('venue_name', $data);
         $this->venue_efile = Util::get('venue_efile', $data);
+        $this->venue_code = Util::get('venue_code', $data);
         $this->created_at = Util::get('created_at', $data);
     }
 }
