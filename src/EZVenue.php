@@ -6,7 +6,7 @@ use \Curl\Curl;
 use \Common\Util;
 
 class EZVenue {
-    const VERSION = '0.3.0';
+    const VERSION = '0.3.1';
     public static $curl;
     public static $api_url;
     public static $mapper_key;
