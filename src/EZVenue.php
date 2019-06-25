@@ -9,6 +9,7 @@ class EZVenue {
     const VERSION = '0.2.1';
     public static $curl;
     public static $api_url;
+    public static $mapper_key;
 
     public function __construct($usernname, $password, $url = 'https://ezvenue.app/api') {
         self::$api_url = $url;
@@ -17,6 +18,18 @@ class EZVenue {
         self::$curl->setBasicAuthentication($usernname, $password);
         self::$curl->setHeader('Content-Type', 'application/json');
         self::$curl->setUserAgent('EZVenue-PHP/'.self::VERSION.' (https://github.com/ez-company/ezvenue-php-sdk) PHP/'.PHP_VERSION.' Curl/'.curl_version()['version']);
+    }
+
+    /**
+     * Set the mapper key
+     *
+     * @param $key
+     * the key you obtained from EZ Venue
+     *
+     * @see https://ezvenue.app/docs/developer#create-a-single-lookup
+     */
+    public function setMapperKey($key) {
+        self::$mapper_key = $key;
     }
 
     /**
@@ -32,7 +45,8 @@ class EZVenue {
         self::$curl->setHeader('Content-Type', 'multipart/form-data');
         $response = self::$curl->post(self::$api_url.'/lookups/batches', [
             'file' => new \CURLFile($file),
-            'mapping' => $mapping
+            'mapping' => $mapping,
+            'mapper_key' => self::$mapper_key
         ]);
 
         if (self::$curl->error) {
@@ -52,6 +66,16 @@ class EZVenue {
      *
      */
     public function createLookup($data) {
+        if (!$data) throw new \Exception('No data provided');
+
+        if (self::$mapper_key) {
+            if (is_object($data)) {
+                $data->mapper_key = self::$mapper_key;
+            } else if (is_array($data)) {
+                $data['mapper_key'] = self::$mapper_key;
+            }
+        }
+
         $response = self::$curl->post(self::$api_url.'/lookups', $data);
         if (self::$curl->error) {
             throw new ProtocolException($response, self::$curl);
