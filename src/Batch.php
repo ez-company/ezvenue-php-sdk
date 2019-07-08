@@ -32,8 +32,8 @@ class Batch {
             }
 
             // process pagination
-            if (!empty(self::$curl->responseHeaders['link'])) {
-                $pagination = new Pagination(self::$curl->responseHeaders['link']);
+            if (!empty(EZVenue::$curl->responseHeaders['link'])) {
+                $pagination = new Pagination(EZVenue::$curl->responseHeaders['link']);
                 $next_page = $pagination->nextPage();
             }
 

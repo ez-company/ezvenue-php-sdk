@@ -6,7 +6,7 @@ use \Curl\Curl;
 use \Common\Util;
 
 class EZVenue {
-    const VERSION = '0.3.3';
+    const VERSION = '0.3.4';
     public static $curl;
     public static $api_url;
 
