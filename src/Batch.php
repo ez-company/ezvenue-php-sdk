@@ -19,7 +19,9 @@ class Batch {
         return $this->completed_at ? true : false;
     }
 
-    public function getItems($params = [], $page = 1) {
+    public function getItems($params = [], $page = 1, &$next_page = null) {
+        $next_page = null;
+
         $response = EZVenue::$curl->get(EZVenue::$api_url.'/lookups/batches/'.$this->id.'/items?page='.$page, $params);
         if (EZVenue::$curl->error) {
             throw new ProtocolException($response, EZVenue::$curl);
@@ -27,6 +29,12 @@ class Batch {
             $items = [];
             foreach ($response as $item_data) {
                 $items[] = new Lookup($item_data);
+            }
+
+            // process pagination
+            if (!empty(self::$curl->responseHeaders['link'])) {
+                $pagination = new Pagination(self::$curl->responseHeaders['link']);
+                $next_page = $pagination->nextPage();
             }
 
             return $items;

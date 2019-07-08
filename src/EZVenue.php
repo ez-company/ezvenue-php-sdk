@@ -6,7 +6,7 @@ use \Curl\Curl;
 use \Common\Util;
 
 class EZVenue {
-    const VERSION = '0.3.2';
+    const VERSION = '0.3.3';
     public static $curl;
     public static $api_url;
 
@@ -137,12 +137,5 @@ class EZVenue {
     public function batches($id) {
         $batch = new Batch(['id' => $id]);
         return $batch;
-    }
-
-    public function getPagination() {
-        return [
-            'next' => self::$curl->responseHeaders['next-page'],
-            'last' => self::$curl->responseHeaders['last-page']
-        ];
     }
 }
