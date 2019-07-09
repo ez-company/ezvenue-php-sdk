@@ -86,7 +86,7 @@ class EZVenue {
      * @return array
      *
      */
-    public function getLookups($params = [], $page = 1) {
+    public function getLookups($params = [], $page = 1, &$next_page = null) {
         $response = self::$curl->get(self::$api_url.'/lookups?page='.$page, $params);
         if (self::$curl->error) {
             throw new ProtocolException($response, self::$curl);
@@ -95,6 +95,8 @@ class EZVenue {
             foreach ($response as $lookup_data) {
                 $lookups[] = new Lookup($lookup_data);
             }
+
+            $next_page = Pagination::nextPage();
 
             return $lookups;
         }
