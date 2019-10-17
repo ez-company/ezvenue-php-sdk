@@ -21,11 +21,7 @@ $ezv = new EZVenue(EZV_USERNAME, EZV_ACCESS_TOKEN);
 $data = [
     'ref' => 'XXXX',
     'amount' => 1000,
-    'person' => [
-        'firstname' => 'John',
-        'lastname' => 'Doe',
-        'ssn' => 'XXXX'
-    ]
+    'address' => '1234 Your Address, TX 12345' // can be a coordinates e.g. 123.233334,-93.334343
 ];
 
 $lookup = $ezv->createLookup($data);
