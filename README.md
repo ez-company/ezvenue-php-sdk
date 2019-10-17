@@ -24,7 +24,7 @@ $data = [
     'address' => '1234 Your Address, TX 12345' // can be a coordinates e.g. 123.233334,-93.334343
 ];
 
-$lookup = $ezv->createLookup($data);
+$lookup = $ezv->lookup($data);
 print_r($lookup);
 ```
 
