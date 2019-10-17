@@ -51,7 +51,7 @@ class EZVenue {
      * @return Lookup
      *
      */
-    public function createLookup($data) {
+    public function lookup($data) {
         if (!$data) throw new \Exception('No data provided');
 
         $response = self::$curl->post(self::$api_url.'/lookups', $data);
