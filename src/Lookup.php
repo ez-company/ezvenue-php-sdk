@@ -26,7 +26,7 @@ class Lookup {
         $this->completed_at = Util::get('completed_at', $data);
         $this->results = [];
 
-        if ($results = Util:get('results', $data)) {
+        if ($results = Util::get('results', $data)) {
             foreach ($results as $lookup_result) {
                 $this->results[] = new LookupResult($lookup_result);
             }
