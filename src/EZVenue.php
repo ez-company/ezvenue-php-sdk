@@ -17,6 +17,7 @@ class EZVenue {
         self::$curl->setBasicAuthentication($usernname, $password);
         self::$curl->setHeader('Content-Type', 'application/json');
         self::$curl->setUserAgent('EZVenue-PHP/'.self::VERSION.' (https://github.com/ez-company/ezvenue-php-sdk) PHP/'.PHP_VERSION.' Curl/'.curl_version()['version']);
+        self::$curl->setTimeout(300); // 5m
     }
 
     /**
