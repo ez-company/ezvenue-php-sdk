@@ -1,7 +1,7 @@
 EZ Venue PHP SDK
 ============================
 
-PHP SDK for [EZ Venue API](https://www.ezvenue.us/docs/api/).
+PHP SDK for [EZ Venue API](https://www.ezvenue.app/docs/developer).
 
 ## Installation
 ```term
